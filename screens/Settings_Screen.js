@@ -34,6 +34,7 @@ class Settings_Screen extends Component {
 
   // Donot show header
   static navigationOptions = {
+    headerLeft: null,
     headerTitle: 'Profile Settings',
     tabBarIcon: ({ tintColor }) => (
       <RkText

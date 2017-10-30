@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "reactnative-onlienstore",
+    "name": "reactnative-onlinestore",
     "description": "A shell consumer app with Facebook Auth and Email/Pwd auth using react native, expo, uikitten, and firebase.",
     "slug": "reactnative-onlinestore",
     "privacy": "public",

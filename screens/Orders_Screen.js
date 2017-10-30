@@ -25,7 +25,6 @@ class OrdersScreen extends Component {
 
   // Donot show header
   static navigationOptions = {
-
     headerTitle: 'Orders',
     tabBarIcon: ({ tintColor }) => (
       <RkText

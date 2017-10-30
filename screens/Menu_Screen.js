@@ -24,7 +24,11 @@ import {FontAwesome} from './../assets/icons';
 
 class Menu_Screen extends Component {
 
-  static navigationOptions = {
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    headerLeft:
+      <Text onPress={() => navigation.navigate('date_screen')}>
+        {'Hello'}
+      </Text>,
     headerTitle: 'Items',
     tabBarLabel: 'Home',
     tabBarIcon: ({ tintColor }) => (
@@ -38,7 +42,7 @@ class Menu_Screen extends Component {
           {FontAwesome.home}
       </RkText>
     ),
-  };
+  });
 
   constructor(props) {
     super(props);
@@ -52,6 +56,8 @@ class Menu_Screen extends Component {
   }
 
   _renderItem(info) {
+    //console.log('-------RKTheme------------');
+    // console.log(RkTheme.current.fonts.sizes.h5);
     return (
       <TouchableOpacity
         delayPressIn={70}

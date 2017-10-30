@@ -27,6 +27,8 @@ import Location_Screen from './screens/Location_Screen';
 import Profile_Screen from './screens/Profile_Screen';
 import Reset_Screen from './screens/Reset_Screen';
 import Settings_Screen from './screens/Settings_Screen';
+import Date_Screen from './screens/Date_Screen';
+
 
 
 export default class App extends React.Component {
@@ -77,14 +79,27 @@ settings_screen: { screen: Settings_Screen },
 
   render() {
 
+    const DateplaceNavigator = StackNavigator({
+      menu_screen: { screen: Menu_Screen },
+      date_screen: { screen: Date_Screen },
+      },
+      {
+        headerMode: 'none',
+        navigationOptions: {
+          tabBarVisible: true,
+        },
+        swipeEnabled: false,
+        lazy: true
+      });
+
+
     const MainNavigator = TabNavigator({
-      menu_scr: { screen: Menu_Screen },
+      menu_scr: { screen: DateplaceNavigator },
       orders_screen: { screen: Orders_Screen },
       settings_screen: { screen: Settings_Screen },
     },
     {
       navigationOptions: {
-        headerLeft: null,
         headerStyle: {
            backgroundColor: 'white',
            elevation: 2,
