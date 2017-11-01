@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Icon } from 'react-native';
+import { View, Text, Icon, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import {
-  RkText
+  RkText,
+  RkTheme
 } from 'react-native-ui-kitten';
 import {FontAwesome} from './../assets/icons';
 
@@ -11,7 +12,16 @@ class Date_Screen extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
     headerTitle: 'Date',
     headerLeft: <RkText rkType='awesome'
-                      onPress={ () => { navigation.goBack() }}> {FontAwesome.chevronLeft}  </RkText>,
+                        style={{
+                          fontSize: RkTheme.current.fonts.sizes.h1,
+                          alignSelf:'center',
+                          marginBottom: Platform.OS === 'ios' ? 0 : 10,
+                          marginTop: Platform.OS === 'ios' ? 20: 0,
+                          marginLeft: 10
+                        }}
+                        onPress={ () => { navigation.goBack() }}>
+                          {FontAwesome.chevronLeft}
+                </RkText>,
     tabBarVisible: false,
   });
 
@@ -19,7 +29,7 @@ class Date_Screen extends Component {
     console.log('Login_Screen:Line 15: Rendering Login_Screen');
       return (
           <View>
-            <Text> Hello World {FontAwesome.facebook} </Text>
+            <Text> Where is poopito </Text>
           </View>
       )
   }

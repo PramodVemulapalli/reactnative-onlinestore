@@ -106,6 +106,7 @@ settings_screen: { screen: Settings_Screen },
            paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight + 10
          },
          headerTitleStyle: {
+           fontFamily: RkTheme.current.fonts.family.bold,
            fontSize: RkTheme.current.fonts.sizes.h5,
            alignSelf:'center',
            marginBottom: Platform.OS === 'ios' ? 0 : 10,

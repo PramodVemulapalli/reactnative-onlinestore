@@ -25,10 +25,17 @@ import {FontAwesome} from './../assets/icons';
 class Menu_Screen extends Component {
 
   static navigationOptions = ({ navigation, screenProps }) => ({
-    headerLeft:
-      <Text onPress={() => navigation.navigate('date_screen')}>
-        {'Hello'}
-      </Text>,
+    headerLeft: <RkText
+          style={{
+            fontFamily: RkTheme.current.fonts.family.bold,
+            fontSize: RkTheme.current.fonts.sizes.h5,
+            marginBottom: Platform.OS === 'ios' ? 0 : 10,
+            marginTop: Platform.OS === 'ios' ? 25: 0,
+            marginLeft: 10
+          }}
+          onPress={ () => { navigation.navigate('date_screen') }}>
+            {"Tomorrow\'s Menu"}
+      </RkText>,
     headerTitle: 'Items',
     tabBarLabel: 'Home',
     tabBarIcon: ({ tintColor }) => (
