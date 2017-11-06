@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import {
   FlatList,
   Image,
@@ -8,6 +9,7 @@ import {
   Platform,
   StatusBar
 } from 'react-native';
+import { connect } from 'react-redux';
 import {
   RkText,
   RkCard,
@@ -15,6 +17,8 @@ import {
   RkTheme
 } from 'react-native-ui-kitten';
 import { Header } from 'react-navigation';
+import { itemsFetch } from '../actions';
+
 
 import {SocialBar} from './../components/';
 import articles from './../data/raw/articles';
@@ -58,6 +62,10 @@ class Menu_Screen extends Component {
     console.log(articles);
   }
 
+  componentWillMount() {
+    this.props.itemsFetch();
+  }
+
   _keyExtractor(post) {
     return post.id;
   }
@@ -71,18 +79,18 @@ class Menu_Screen extends Component {
         activeOpacity={0.8}
         onPress={() => this.props.navigation.navigate('Article', {id: info.item.id})}>
       	<RkCard rkType='horizontal' style={styles.card}>
-        	<Image rkCardImg source={info.item.photo}/>
+        	<Image rkCardImg source={{ uri: info.item.photo}}/>
 
           <View rkCardContent style={{justifyContent: 'space-around'}}>
             <View style={{ flex: 1, justifyContent: 'flex-start'}}>
-              <RkText numberOfLines={1} rkType='h6'>{info.item.header}</RkText>
+              <RkText numberOfLines={1} rkType='h6'>{info.item.name}</RkText>
               <RkText rkType='s6 hintColor'>{'Sandra Powers'}</RkText>
             </View>
             <View style={{ marginTop: 20, flex: 1, justifyContent: 'center'}}>
               <RkText style={styles.post} numberOfLines={1} rkType={Platform.OS==='android' ? 's5':'s3'}>{'Hi There 1'}</RkText>
             </View>
             <View style={{ marginBottom: 0, flex: 1, justifyContent: 'flex-end'}}>
-              <RkText style={styles.post} numberOfLines={1} rkType={Platform.OS==='android' ? 's5  hintColor':'s3  hintColor'}>{'8 Oz / $2.99'}</RkText>
+              <RkText style={styles.post} numberOfLines={1} rkType={Platform.OS==='android' ? 's5  hintColor':'s3  hintColor'}>{'8 Oz / $1.99'}</RkText>
             </View>
           </View>
           <View rkCardFooter>
@@ -95,11 +103,17 @@ class Menu_Screen extends Component {
 
   render() {
 
+    console.log('userdetails');
+    console.log(this.props.allitems);
+    console.log(articles);
+
+    if (this.props.allitems) {
+
     return (
       <View>
         <FlatList
-          data={articles}
-          renderItem={this.renderItem}
+          data={this.props.allitems}
+          renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
           style={styles.container}/>
         <Text>
@@ -107,6 +121,16 @@ class Menu_Screen extends Component {
         </Text>
       </View>
     )
+
+  } else {
+    return (
+      <View>
+        <Text>
+          Hello World
+        </Text>
+      </View>
+    )
+  }
   }
 }
 
@@ -141,4 +165,16 @@ let styles = RkStyleSheet.create(theme => ({
   }
 }));
 
-export default Menu_Screen;
+const mapStateToProps = ({ appdata }) => {
+  //const { itemsdata } = appdata;
+  const allitems = _.map( appdata.itemsdata, (val, id) => {
+    return { ...val, id };
+  });
+
+  return { allitems };
+
+};
+
+export default connect(mapStateToProps, {
+  itemsFetch
+})(Menu_Screen);
